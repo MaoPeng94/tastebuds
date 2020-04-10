@@ -11,3 +11,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |	https://codeigniter.com/user_guide/general/hooks.html
 |
 */
+
+$hook['post_controller_constructor'] = [
+	'class'    => 'HKLogin',
+    'function' => 'HKL_check',
+    'filename' => 'HKLogin.php',
+    'filepath' => 'hooks',
+];
