@@ -1,5 +1,16 @@
 <?php $this->load->view("inc/sidebar"); ?>
 <link rel="stylesheet" href="assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+<style type="text/css">
+	#user_list td{
+		vertical-align: middle;
+	}
+
+	#user_list td.action a{
+		background-color:white;
+		color: black;
+	}
+	
+</style>
 <section class="content">
     <div class="body_scroll">
         <div class="block-header">
@@ -27,40 +38,45 @@
                                 <table class="table table-bordered table-striped table-hover dataTable" id="user_list">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                        	<th>Photo</th>
+                                        	<th>User ID</th>
+                                        	<th>User Name</th>
+                                            <th>Full Name</th>
+                                            <th>Email</th>
+                                            <th>Gender</th>
+                                            <th>Birthday</th>
+                                            <th>Address</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
+                                            <td class="text-center"><img src="assets/images/ecommerce/1.png" width="48" alt="Product img"></td>
+                                            <td>User ID</td>
+                                            <td>samcheng</td>
+                                            <td>Sam Cheng</td>
+                                            <td><a href="mailto:samcheng955@outlook.com">samcheng955@outlook.com</a></td>
+                                            <td>Male</td>
                                             <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>China, Shenyang</td>
+                                            <td class="action">
+                                            	<a href="<?= base_url('profile/user1000000')?>" class="btn btn-default waves-effect waves-float btn-sm waves-green" style="padding:5px 8px"><i class="zmdi zmdi-eye"></i></a>
+                                            	<a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
+                                         <tr>
+                                            <td class="text-center"><img src="assets/images/ecommerce/1.png" width="48" alt="Product img"></td>
+                                            <td>User ID</td>
+                                            <td>samcheng</td>
+                                            <td>Sam Cheng</td>
+                                            <td><a href="mailto:samcheng955@outlook.com">samcheng955@outlook.com</a></td>
+                                            <td>Male</td>
+                                            <td>2011/04/25</td>
+                                            <td>China, Shenyang</td>
+                                            <td class="action">
+                                            	<a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green" style="padding:5px 8px"><i class="zmdi zmdi-eye"></i></a>
+                                            	<a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

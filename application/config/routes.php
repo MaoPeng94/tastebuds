@@ -54,3 +54,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['user_login'] = "login/user_login";
 $route['logout'] = "login/user_logout";
+$route['profile/(:any)'] = "users/profile/$1";

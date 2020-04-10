@@ -13,5 +13,12 @@ class Users extends CI_Controller{
 		$this->load->view("users/index");
 
 	}
+	function profile($userId){
+
+		$data['userId'] = $userId;
+		$this->load->view("inc/header");
+		$this->load->view("users/profile", $data);
+
+	}
 
 }

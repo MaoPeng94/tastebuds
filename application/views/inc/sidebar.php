@@ -173,17 +173,23 @@
     </div>
     <div class="menu">
         <ul class="list">
+            <?php $user = $this->session->userdata("user");?>
             <li>
                 <div class="user-info">
                     <a class="image" href="profile.html"><img src="/assets/images/profile_av.jpg" alt="User"></a>
                     <div class="detail">
-                        <h4>Michael</h4>
+                        <h4><?=$user['firstname']?> <?= $user['lastname']?></h4>
                         <small>Super Admin</small>                        
                     </div>
                 </div>
             </li>
-            <li class="active open"><a href="<?= base_url('dashboard')?>"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            <li><a href="<?= base_url("users")?>"><i class="zmdi zmdi-accounts-add"></i><span>User Accounts</span></a></li>
+            <?php $class = strtolower($this->router->class); ?>
+            <li <?php if($class=="dashboard"):?> class="active open" <?php endif;?> >
+                <a href="<?= base_url('dashboard')?>"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
+            </li>
+            <li <?php if($class=="users"):?> class="active open" <?php endif;?>>
+                <a href="<?= base_url("users")?>"><i class="zmdi zmdi-accounts-add"></i><span>User Accounts</span></a>
+            </li>
         </ul>
     </div>
 </aside>
