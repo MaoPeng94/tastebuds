@@ -30,7 +30,6 @@
                                         <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
                                     </div>
                                 </div>
-                                <span class="warning">Invaild User</span>
                                 <div class="input-group mb-3">
                                     <input type="password" class="form-control" placeholder="Password" name="password" required>
                                     <div class="input-group-append">                                

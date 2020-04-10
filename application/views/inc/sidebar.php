@@ -162,7 +162,7 @@
                 </li>
             </ul>
         </li>
-        <li><a href="sign-in.html" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
+        <li><a href="logout" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
     </ul>
 </div>
 <!-- Left Sidebar -->
@@ -182,8 +182,8 @@
                     </div>
                 </div>
             </li>
-            <li class="active open"><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            <li><a href="#"><i class="zmdi zmdi-accounts-add"></i><span>User Accounts</span></a></li>
+            <li class="active open"><a href="<?= base_url('dashboard')?>"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+            <li><a href="<?= base_url("users")?>"><i class="zmdi zmdi-accounts-add"></i><span>User Accounts</span></a></li>
         </ul>
     </div>
 </aside>
