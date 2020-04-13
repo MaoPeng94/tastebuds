@@ -139,7 +139,7 @@
 			return $data;
 		}
 		function update_aboutme(){
-			$data = $this->input->post();
+			$data = $this->input->get();
 			return $data;
 		}
 		function aboutme(){
