@@ -59,12 +59,7 @@
 				case 'artist':
 					$data['data'] = $this->add_artist();
 					break;
-				case 'question':
-					$data['data'] = $this->update_question();
-					break;
-				case 'aboutme':
-					$data['data'] = $this->update_aboutme();
-					break;
+			
 				default:
 					break;
 			}
@@ -72,13 +67,26 @@
 		}
 
 		function index_delete($func){
-
+			$data = [];
 			switch ($func) {
 				case 'artist':
 					$data['data'] = $this->remove_artist();
 					break;
 				default:
-					# code...
+					break;
+			}
+		}
+
+		function index_put($func){
+			$data = [];
+			switch (variable) {
+				case 'question':
+					$data['data'] = $this->update_question();
+					break;
+				case 'aboutme':
+					$data['data'] = $this->update_aboutme();
+					break;
+				default:
 					break;
 			}
 		}
