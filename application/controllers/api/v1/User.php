@@ -135,7 +135,7 @@
 		}
 
 		function update_question(){
-			$data = $this->input->put();
+			$data = $_PUT;
 			return $data;
 		}
 		function update_aboutme(){
