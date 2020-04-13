@@ -59,7 +59,6 @@
 				case 'artist':
 					$data['data'] = $this->add_artist();
 					break;
-			
 				default:
 					break;
 			}
@@ -79,7 +78,7 @@
 
 		function index_put($func){
 			$data = [];
-			switch (variable) {
+			switch ($func) {
 				case 'question':
 					$data['data'] = $this->update_question();
 					break;
@@ -136,7 +135,7 @@
 		}
 
 		function update_question(){
-			$data = $this->input->post();
+			$data = $this->input->get();
 			return $data;
 		}
 		function update_aboutme(){
