@@ -15,6 +15,7 @@
 				$this->session->set_flashdata("login_result","username");
 				redirect("login");
 			}
+			
 			$this->db->where(array("username"=>$username, "password"=>$password));
 			$query = $this->db->get("tbl_admin");
 			if($query->num_rows() == 0 ){

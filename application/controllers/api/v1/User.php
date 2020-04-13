@@ -5,15 +5,11 @@
 	class User extends REST_Controller{
 		function __construct(){
 			parent::__construct();
+			$this->load->model("User_model", "user");
 		}
 		function index_get($func){
 			$data = [];
 			switch ($func) {
-				case 'profile':
-					$result = $this->profile();
-					$data['data'] = $result;
-					$data['success'] = "Profile Api Called!";
-					break;
 				case 'user':
 					$data['data'] = $this->get_user();
 					break;
@@ -27,6 +23,9 @@
 				case 'aboutme':
 					$data['data'] = $this->aboutme();
 					$data['success'] = "Called aboutme";
+					break;
+				case 'remove_artist':
+					$data['data'] = $this->remove_artist();
 					break;
 				default:
 					break;
@@ -49,9 +48,12 @@
 					break;
 				case 'like':
 					$data['data'] = $this->like();
+					$data['success'] = "Like function called";
 					break;
 				case 'skip':
 					$data['data'] = $this->skip();
+					$data['success'] = "Skip function called";
+
 					break;
 				case 'upload':
 					$data['data'] = $this->upload();
@@ -59,54 +61,37 @@
 				case 'artist':
 					$data['data'] = $this->add_artist();
 					break;
+				case 'update_question':
+					$data['data'] = $this->update_question();
+					break;
+				case 'update_aboutme':
+					$data['data'] = $this->update_aboutme();
+					break;
 				default:
 					break;
 			}
 			$this->response($data, REST_Controller::HTTP_OK);
 		}
 
-		function index_delete($func){
-			$data = [];
-			switch ($func) {
-				case 'artist':
-					$data['data'] = $this->remove_artist();
-					break;
-				default:
-					break;
-			}
-		}
-
-		function index_put($func){
-			$data = [];
-			switch ($func) {
-				case 'question':
-					$data['data'] = $this->update_question();
-					break;
-				case 'aboutme':
-					$data['data'] = $this->update_aboutme();
-					break;
-				default:
-					break;
-			}
-		}
 
 		function signup(){
 			$data = $this->input->post();
-			return $data;
+			$result = $this->user->register($data);
+			return $result;
 		}
 
 		function signin(){
 			$data = $this->input->post();
-			return $data;
+			$data['password'] = md5($data['password']);
+			$result = $this->user->signin($data);
+			return $result;
 		}
 
-		function profile(){
-			$data = $this->input->get();
-			return $data;
-		}
 
+		// get single user by userId
 		function get_user(){
-			$data = $this->input->get();
+			$userId = $this->input->get("userId");
+			$data = $this->user->get_user($userId);
 			return $data;
 		}
 		function get_matches(){
@@ -130,16 +115,15 @@
 			return $data;
 		}
 		function remove_artist(){
-			$data = $this->input->delete();
+			$data = $this->input->get();
 			return $data;
 		}
-
 		function update_question(){
-			$data = $_REQUEST;
+			$data = $this->input->post();
 			return $data;
 		}
 		function update_aboutme(){
-			$data = $this->input->get();
+			$data = $this->input->post();
 			return $data;
 		}
 		function aboutme(){
