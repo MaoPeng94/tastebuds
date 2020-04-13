@@ -135,7 +135,7 @@
 		}
 
 		function update_question(){
-			$data = $_PUT;
+			$data = $_REQUEST;
 			return $data;
 		}
 		function update_aboutme(){
