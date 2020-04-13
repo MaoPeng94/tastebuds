@@ -10,6 +10,8 @@
 			$data = [];
 			switch ($func) {
 				case 'profile':
+					$result = $this->profile();
+					$data['data'] = $result;
 					$data['success'] = "Profile Api Called!";
 					break;
 				default:
@@ -44,6 +46,11 @@
 
 		function signin(){
 			$data = $this->input->post();
+			return $data;
+		}
+
+		function profile(){
+			$data = $this->input->get();
 			return $data;
 		}
 	}
