@@ -40,10 +40,10 @@
  					$data['success'] = "Sign up function called!";
 					break;
 				case 'like':
-					$data['userId'] = $this->input->get("userId");
+					$data['data'] = $this->like();
 					break;
 				case 'skip':
-					$data['userId'] = $this->input->get("userId");
+					$data['userId'] = $this->skip();
 					break;
 
 				default:
@@ -64,6 +64,14 @@
 
 		function profile(){
 			$data = $this->input->get();
+			return $data;
+		}
+		function like(){
+			$data = $this->input->post();
+			return $data;
+		}
+		function skip(){
+			$data = $this->input->post();
 			return $data;
 		}
 	}
