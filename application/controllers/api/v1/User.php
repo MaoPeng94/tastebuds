@@ -22,9 +22,11 @@
 					break;
 				case 'artists':
 					$data['data'] = $this->get_artists();
+					$data['success'] = "Called artists";
 					break;
 				case 'aboutme':
 					$data['data'] = $this->aboutme();
+					$data['success'] = "Called aboutme";
 					break;
 				default:
 					break;
