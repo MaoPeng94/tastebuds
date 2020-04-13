@@ -2,7 +2,7 @@
 	
 	require APPPATH.'libraries/REST_Controller.php';
 
-	class Login extends REST_Controller{
+	class User extends REST_Controller{
 		function __construct(){
 			parent::__construct();
 		}
@@ -13,6 +13,12 @@
 					$result = $this->profile();
 					$data['data'] = $result;
 					$data['success'] = "Profile Api Called!";
+					break;
+				case 'user':
+					$data['userId'] = $this->input->get("userId");
+					break;
+				case 'matches':
+					$data['userId'] = $this->input->get("userId");
 					break;
 				default:
 					break;
@@ -33,6 +39,13 @@
 					$data['data'] = $result;
  					$data['success'] = "Sign up function called!";
 					break;
+				case 'like':
+					$data['userId'] = $this->input->get("userId");
+					break;
+				case 'skip':
+					$data['userId'] = $this->input->get("userId");
+					break;
+
 				default:
 					break;
 			}
