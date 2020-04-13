@@ -15,10 +15,16 @@
 					$data['success'] = "Profile Api Called!";
 					break;
 				case 'user':
-					$data['userId'] = $this->input->get("userId");
+					$data['data'] = $this->get_user();
 					break;
 				case 'matches':
-					$data['userId'] = $this->input->get("userId");
+					$data['data'] = $this->get_matches();
+					break;
+				case 'artist':
+					$data['data'] = $this->remove_artist();
+					break;
+				case 'aboutme':
+					$data['data'] = $this->aboutme();
 					break;
 				default:
 					break;
@@ -43,9 +49,20 @@
 					$data['data'] = $this->like();
 					break;
 				case 'skip':
-					$data['userId'] = $this->skip();
+					$data['data'] = $this->skip();
 					break;
-
+				case 'upload':
+					$data['data'] = $this->upload();
+					break;
+				case 'artist':
+					$data['data'] = $this->add_artist();
+					break;
+				case 'question':
+					$data['data'] = $this->update_question();
+					break;
+				case 'aboutme':
+					$data['data'] = $this->update_aboutme();
+					break;
 				default:
 					break;
 			}
@@ -66,12 +83,46 @@
 			$data = $this->input->get();
 			return $data;
 		}
+
+		function get_user(){
+			$data = $this->input->get();
+			return $data;
+		}
+		function get_matches(){
+			$data = $this->input->get();
+			return $data;
+		}
 		function like(){
 			$data = $this->input->post();
 			return $data;
 		}
 		function skip(){
 			$data = $this->input->post();
+			return $data;
+		}
+		function upload(){
+			$data = $this->input->post();
+			return $data;
+		}
+		function add_artist(){
+			$data = $this->input->post();
+			return $data;
+		}
+		function remove_artist(){
+			$data = $this->input->get();
+			return $data;
+		}
+
+		function update_question(){
+			$data = $this->input->post();
+			return $data;
+		}
+		function update_aboutme(){
+			$data = $this->input->post();
+			return $data;
+		}
+		function aboutme(){
+			$data = $this->input->get();
 			return $data;
 		}
 	}
