@@ -20,8 +20,8 @@
 				case 'matches':
 					$data['data'] = $this->get_matches();
 					break;
-				case 'artist':
-					$data['data'] = $this->remove_artist();
+				case 'artists':
+					$data['data'] = $this->get_artists();
 					break;
 				case 'aboutme':
 					$data['data'] = $this->aboutme();
@@ -69,6 +69,18 @@
 			$this->response($data, REST_Controller::HTTP_OK);
 		}
 
+		function index_delete($func){
+
+			switch ($func) {
+				case 'artist':
+					$data['data'] = $this->remove_artist();
+					break;
+				default:
+					# code...
+					break;
+			}
+		}
+
 		function signup(){
 			$data = $this->input->post();
 			return $data;
@@ -109,7 +121,7 @@
 			return $data;
 		}
 		function remove_artist(){
-			$data = $this->input->get();
+			$data = $this->input->delete();
 			return $data;
 		}
 
@@ -122,6 +134,11 @@
 			return $data;
 		}
 		function aboutme(){
+			$data = $this->input->get();
+			return $data;
+		}
+
+		function get_artists(){
 			$data = $this->input->get();
 			return $data;
 		}
