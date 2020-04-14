@@ -169,7 +169,7 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="index.html"><img src="/assets/images/logo.svg" width="25" alt="Aero"><span class="m-l-10">Jibe</span></a>
+        <a href="/"><img src="/assets/images/logo.svg" width="40" alt="Jibe"><span class="m-l-10">Jibe</span></a>
     </div>
     <div class="menu">
         <ul class="list">
@@ -189,6 +189,27 @@
             </li>
             <li <?php if($class=="users"):?> class="active open" <?php endif;?>>
                 <a href="<?= base_url("users")?>"><i class="zmdi zmdi-accounts-add"></i><span>User Accounts</span></a>
+            </li>
+            
+            <li <?php if($class=="music"):?> class="active open" <?php endif;?>>
+                <a href="<?= base_url("music")?>"><i class="zmdi zmdi-collection-music"></i><span>Music Management</span></a>
+            </li>
+            <li <?php if($class=="advertisement"):?> class="active open" <?php endif;?>>
+                <a href="<?= base_url("advertisement")?>"><i class="zmdi zmdi-settings"></i><span>Membership Settings</span></a>
+            </li>
+             <li <?php if(strtolower($class) =="resource"):?> class="active open" <?php endif;?>>
+                <!-- <a href="<?= base_url("Resource")?>"> -->
+                <a href="javascript:void(0)" class="menu-toggle toggled waves-effect waves-block">
+                    <i class="zmdi zmdi-settings"></i><span>Resource Management</span>
+                </a>
+                <ul class="ml-menu">
+                    <li>
+                        <a href="<?= base_url("Resource")?>" class=" waves-effect waves-block"> Basic Data</a>
+                    </li>
+                    <!-- <li>
+                        <a href="/resource/questionList" class=" waves-effect waves-block"> Question List</a>
+                    </li> -->
+                </ul>
             </li>
         </ul>
     </div>

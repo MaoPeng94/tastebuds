@@ -50,34 +50,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <?php foreach($users as $user):?>
+                                        <tr data-id="<?= $user['id']?>">
                                             <td class="text-center"><img src="assets/images/ecommerce/1.png" width="48" alt="Product img"></td>
-                                            <td>User ID</td>
-                                            <td>samcheng</td>
-                                            <td>Sam Cheng</td>
-                                            <td><a href="mailto:samcheng955@outlook.com">samcheng955@outlook.com</a></td>
-                                            <td>Male</td>
-                                            <td>2011/04/25</td>
-                                            <td>China, Shenyang</td>
+                                            <td><?= $user['userId']?></td>
+                                            <td><?= $user['username']?></td>
+                                            <td><?= $user['firstname']." " .$user['lastname']?></td>
+                                            <td><a href="mailto:<?= $user['email']?>"><?= $user['email']?></a></td>
+                                            <td><?= $user['gender']?></td>
+                                            <td><?= $user['born']?></td>
+                                            <td><?= $user['country']." ".$user['city']?></td>
                                             <td class="action">
-                                            	<a href="<?= base_url('profile/user1000000')?>" class="btn btn-default waves-effect waves-float btn-sm waves-green" style="padding:5px 8px"><i class="zmdi zmdi-eye"></i></a>
-                                            	<a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
+                                            	<a href="<?= base_url('profile/'.$user["userId"])?>" class="btn btn-default waves-effect waves-float btn-sm waves-green" style="padding:5px 8px"><i class="zmdi zmdi-eye"></i></a>
+                                            	<a href="<?= base_url("users/delete_user/".$user['userId'])?>" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
                                             </td>
                                         </tr>
-                                         <tr>
-                                            <td class="text-center"><img src="assets/images/ecommerce/1.png" width="48" alt="Product img"></td>
-                                            <td>User ID</td>
-                                            <td>samcheng</td>
-                                            <td>Sam Cheng</td>
-                                            <td><a href="mailto:samcheng955@outlook.com">samcheng955@outlook.com</a></td>
-                                            <td>Male</td>
-                                            <td>2011/04/25</td>
-                                            <td>China, Shenyang</td>
-                                            <td class="action">
-                                            	<a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-green" style="padding:5px 8px"><i class="zmdi zmdi-eye"></i></a>
-                                            	<a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                            </td>
-                                        </tr>
+                                        <?php endforeach;?>
                                     </tbody>
                                 </table>
                             </div>
@@ -92,8 +80,31 @@
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
 <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
 <!-- Jquery DataTable Plugin Js --> 
+<script src="assets/plugins/bootstrap-notify/bootstrap-notify.js"></script> <!-- Bootstrap Notify Plugin Js -->
 <script src="assets/bundles/datatablescripts.bundle.js"></script>
 <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js --> 
 <script src="assets/js/pages/users.js"></script>
+<script type="text/javascript">
+    <?php if($this->session->has_userdata("delete_user")):?>
+    <?php $delete_result = $this->session->userdata("delete_user");?>
+    <?php if($delete_result['success']) : ?>
+        $.notify({
+            // options
+            message: "<?= $delete_result['msg']?>"
+        },{
+            // settings
+            type: 'success'
+        });
+    <?php else:?>
+        $.notify({
+            // options
+            message: "<?= $delete_result['msg']?>"
+        },{
+            // settings
+            type: 'danger'
+        });
+    <?php endif;?>
+    <?php endif;?> 
+</script>
 </body>
 </html>

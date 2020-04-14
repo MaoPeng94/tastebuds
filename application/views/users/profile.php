@@ -26,10 +26,10 @@
                     <div class="card mcard_3">
                         <div class="body">
                             <a href="profile.html"><img src="/assets/images/profile_av.jpg" class="rounded-circle shadow " alt="profile-image"></a>
-                            <h4 class="m-t-10">Michael Dorsey</h4>                            
+                            <h4 class="m-t-10"><?= $user['firstname']." ".$user['lastname']?></h4>                            
                             <div class="row">
                                 <div class="col-12">
-                                    <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                    <p class="text-muted"><?= $user['country']. " ".$user['city']?></p>
                                 </div>
                                 <div class="col-4">                                    
                                     <small>Following</small>
@@ -49,16 +49,16 @@
                     <div class="card">
                         <div class="body">
                             <small class="text-muted">Email address: </small>
-                            <p>michael_dorsey@gmail.com</p>
+                            <p><?= $user['email']?></p>
                             <hr>
                             <small class="text-muted">Phone: </small>
                             <p>+ 202-555-0191</p>
                             <hr>
                             <small class="text-muted">Birthday: </small>
-                            <p>01/11/1998</p>
+                            <p><?= $user['born']?></p>
                             <hr>
                             <small class="text-muted">Gender: </small>
-                            <p>Male</p>
+                            <p><?= ucfirst($user['gender'])?></p>
                             <hr>
                             <span>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span>
                         </div>

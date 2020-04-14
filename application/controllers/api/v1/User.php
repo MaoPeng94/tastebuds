@@ -86,14 +86,13 @@
 			$result = $this->user->signin($data);
 			return $result;
 		}
-
-
 		// get single user by userId
 		function get_user(){
 			$userId = $this->input->get("userId");
 			$data = $this->user->get_user($userId);
 			return $data;
 		}
+		
 		function get_matches(){
 			$data = $this->input->get();
 			return $data;
