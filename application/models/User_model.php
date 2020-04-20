@@ -13,7 +13,8 @@
 		// User Registeration function
 		function register($userdata){
 			
-			return array("success"=>0, "msg"=>$userdata);
+			// return array("success"=>0, "msg"=>$userdata);
+			$userdata = json_decode($userdata);
 			$useremail = $userdata['email'];
 			$this->db->where("email", $useremail);
 			$count = $this->db->count_all_results("tbl_users");
