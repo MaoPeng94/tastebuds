@@ -11,21 +11,19 @@
 			$data = [];
 			switch ($func) {
 				case 'user':
-					$data['data'] = $this->get_user();
+					$data = $this->get_user();
 					break;
 				case 'matches':
-					$data['data'] = $this->get_matches();
+					$data = $this->get_matches();
 					break;
 				case 'artists':
-					$data['data'] = $this->get_artists();
-					$data['success'] = "Called artists";
+					$data = $this->get_artists();
 					break;
 				case 'aboutme':
-					$data['data'] = $this->aboutme();
-					$data['success'] = "Called aboutme";
+					$data = $this->aboutme();
 					break;
 				case 'remove_artist':
-					$data['data'] = $this->remove_artist();
+					$data = $this->remove_artist();
 					break;
 				default:
 					break;
@@ -37,35 +35,28 @@
 			$data = [];
 			switch ($func) {
 				case 'signin':
-					$result = $this->signin();
-					$data['data'] = $result;
-					$data['success'] = "Sign in function called!";
+					$data = $this->signin();
 					break;
 				case 'signup':
-					$result = $this->signup();
-					$data['data'] = $result;
- 					$data['success'] = "Sign up function called!";
+					$data = $this->signup();
 					break;
 				case 'like':
-					$data['data'] = $this->like();
-					$data['success'] = "Like function called";
+					$data = $this->like();
 					break;
 				case 'skip':
-					$data['data'] = $this->skip();
-					$data['success'] = "Skip function called";
-
+					$data = $this->skip();
 					break;
 				case 'upload':
-					$data['data'] = $this->upload();
+					$data = $this->upload();
 					break;
 				case 'artist':
-					$data['data'] = $this->add_artist();
+					$data = $this->add_artist();
 					break;
 				case 'update_question':
-					$data['data'] = $this->update_question();
+					$data = $this->update_question();
 					break;
 				case 'update_aboutme':
-					$data['data'] = $this->update_aboutme();
+					$data = $this->update_aboutme();
 					break;
 				default:
 					break;
