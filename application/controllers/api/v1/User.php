@@ -129,6 +129,7 @@
 		}
 		function subscribe(){
 			$email = $this->input->get("email");
+			$email = base64_decode($email);
 			$this->db->insert("tbl_subscribers", array("email"=>$email));
 			if($this->db->insert_id()){
 				return array("success"=>1, "msg"=>"");
