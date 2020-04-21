@@ -56,8 +56,8 @@
 			unset($data['userId']);
 			$this->db->where("userId", $userId);
 			$query = $this->db->update("tbl_users", $data);
-			if($query) return array("success"=>1);
-			else return array("success"=>0);
+			if($query) return array("success"=>1, "data"=>$data);
+			else return array("success"=>0,"data"=>$data);
 		}
 	}
 ?>
