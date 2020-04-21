@@ -25,6 +25,8 @@
 				case 'remove_artist':
 					$data = $this->remove_artist();
 					break;
+				case 'subscribe':
+					$data = $this->subscribe();
 				default:
 					break;
 			}
@@ -124,6 +126,14 @@
 		function get_artists(){
 			$data = $this->input->get();
 			return $data;
+		}
+		function subscribe(){
+			$email = $this->input->get("email");
+			$this->db->insert("tbl_subscribers", array("email"=>$email));
+			if($this->db->insert_id()){
+				return array("success"=>1, "msg"=>"");
+			}
+			else return array("success"=>0, "msg"=>"");
 		}
 	}
 
