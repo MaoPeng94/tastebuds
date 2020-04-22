@@ -151,7 +151,7 @@
 			$config['smtp_host'] = 'mail.jibe.life';
 			$config['smtp_user'] = '_mainaccount@jibe.life';
 			$config['smtp_pass'] = '123456qwerty!@#$%^QWERTY';
-			$config['smtp_port'] = 25;
+			$config['smtp_port'] = 465;
 			$config['mailtype'] = "text";
 			$this->email->initialize($config);
 
