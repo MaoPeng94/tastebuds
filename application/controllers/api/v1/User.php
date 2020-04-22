@@ -130,11 +130,14 @@
 		function subscribe(){
 			$email = $this->input->get("email");
 			$email = base64_decode($email);
+			$this->db->where("email", $email);
+			$count = $this->db->count_all_results("tbl_subscribers");
+			if($count > 0) return array("success"=>0, "msg"=>"You are already subscribed, Thank you.");
 			$this->db->insert("tbl_subscribers", array("email"=>$email));
 			if($this->db->insert_id()){
 				return array("success"=>1, "msg"=>"");
 			}
-			else return array("success"=>0, "msg"=>"");
+			else return array("success"=>0, "msg"=>"Oop!, Something went wrong! Please try again later!");
 		}
 	}
 
