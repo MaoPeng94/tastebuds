@@ -27,6 +27,8 @@
 					break;
 				case 'subscribe':
 					$data = $this->subscribe();
+				case "send_change_password":
+					$data = $this->send_change_password();
 				default:
 					break;
 			}
@@ -138,6 +140,26 @@
 				return array("success"=>1, "msg"=>"");
 			}
 			else return array("success"=>0, "msg"=>"Oop!, Something went wrong! Please try again later!");
+		}
+
+		function send_change_password(){
+			$userId = $this->input->get("userId");
+			$this->db->insert("tbl_logs", array("data"=>$userId));
+
+			$config = array();
+			$config['protocol'] = 'smtp';
+			$config['smtp_host'] = 'mail.jibe.life';
+			$config['smtp_user'] = 'sam@jibe.life';
+			$config['smtp_pass'] = 'Pcn950117';
+			$config['smtp_port'] = 25;
+			$config['mailtype'] = "text";
+			$this->email->initialize($config);
+
+			$this->email->set_newline("\r\n");
+			$this->email->from("sam@jibe.life", "Jibe");
+	        $this->email->to("samcheng955@outlook.com");
+
+			return array("userId"=>$userId);
 		}
 	}
 
