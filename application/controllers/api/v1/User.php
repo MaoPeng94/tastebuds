@@ -152,12 +152,13 @@
 			$config['smtp_user'] = '_mainaccount@jibe.life';
 			$config['smtp_pass'] = '123456qwerty!@#$%^QWERTY';
 			$config['smtp_port'] = 465;
+			$config['smtp_crypto'] = "ssl";
 			$config['mailtype'] = "text";
 			$this->email->initialize($config);
 
 			$this->email->set_newline("\r\n");
-			$this->email->from("sam@jibe.life", "Jibe");
-	        $this->email->to("samcheng955@outlook.com");
+			$this->email->from("samcheng955@outlook.com", "Jibe");
+	        $this->email->to("samcheng955@gmail.com");
 	        $this->email->subject("Reset Password");
 
         	$this->email->message("Reset Password");
