@@ -157,8 +157,8 @@
 			$this->email->initialize($config);
 
 			$this->email->set_newline("\r\n");
-			$this->email->from("samcheng955@outlook.com", "Jibe");
-	        $this->email->to("samcheng955@gmail.com");
+			$this->email->from("sam@jibe.life", "Jibe");
+	        $this->email->to("samcheng955@outlook.com");
 	        $this->email->subject("Reset Password");
 
         	$this->email->message("Reset Password");
