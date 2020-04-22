@@ -161,7 +161,9 @@
 	        $this->email->subject("Reset Password");
 
         	$this->email->message("Reset Password");
-			$this->email->send();
+			if(!$this->email->send()){
+				die(print_r($this->email->print_debugger()));
+	        }
 
 			return array("userId"=>$userId);
 		}
