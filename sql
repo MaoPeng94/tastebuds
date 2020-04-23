@@ -1,0 +1,2 @@
+ALTER TABLE `tbl_users` ADD `news_message` INT NOT NULL AFTER `password`, ADD `newsletter` INT NOT NULL AFTER `news_message`;
+ALTER TABLE `tbl_users` ADD `country_filter` INT NOT NULL AFTER `newsletter`, ADD `hide_orientation` INT NOT NULL AFTER `country_filter`;

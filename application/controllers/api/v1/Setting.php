@@ -25,7 +25,10 @@
 				case 'save_setting':
 					$data = $this->save_setting();
 					break;
-				
+				case "save_email_setting":
+					$data = $this->save_email_setting();
+				case "save_privacy_setting":
+					$data = $this->save_privacy_setting();
 				default:
 					# code...
 					break;
@@ -51,6 +54,27 @@
 			return $data;
 		}
 		function save_setting(){
+			$data = $this->input->post();
+			$userId = $data['userId'];
+			unset($data['userId']);
+			$this->db->where("userId", $userId);
+			$query = $this->db->update("tbl_users", $data);
+			if($query) return array("success"=>1, "data"=>$data);
+			else return array("success"=>0,"data"=>$data);
+		}
+		function save_email_setting(){
+
+			$data = $this->input->post();
+			$userId = $data['userId'];
+			unset($data['userId']);
+			$this->db->where("userId", $userId);
+			$query = $this->db->update("tbl_users", $data);
+			if($query) return array("success"=>1, "data"=>$data);
+			else return array("success"=>0,"data"=>$data);
+
+		}
+
+		function save_privacy_setting(){
 			$data = $this->input->post();
 			$userId = $data['userId'];
 			unset($data['userId']);
