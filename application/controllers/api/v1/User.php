@@ -50,9 +50,6 @@
 				case 'skip':
 					$data = $this->skip();
 					break;
-				case 'upload':
-					$data = $this->upload();
-					break;
 				case 'artist':
 					$data = $this->add_artist();
 					break;
@@ -61,6 +58,9 @@
 					break;
 				case 'update_aboutme':
 					$data = $this->update_aboutme();
+					break;
+				case 'uploadPhoto':
+					$data = $this->uploadPhoto();
 					break;
 				default:
 					break;
@@ -100,9 +100,23 @@
 			$data = $this->input->post();
 			return $data;
 		}
-		function upload(){
-			$data = $this->input->post();
-			return $data;
+		function uploadPhoto(){
+			$userId = $this->input->post("userId");
+			if(isset($_FILES['image']) && $_FILES['image']['name'] != ""){
+				$fileName 						=  $userId.time();
+				$config['upload_path']          =  './assets/images/photos/';
+                $config['allowed_types']        =  'gif|jpg|png|jpeg';
+                $config['file_name']			= 	$fileName;
+               	$this->load->library( 'upload', $config );
+               	if( $this->upload->do_upload("image") ){
+               		$ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION );
+               		$fileName = $fileName.".".$ext;
+               		$this->db->insert("tbl_photos", array("userId"=>$userId, "image"=>$fileName));
+               		return array("filename"=>$fileName, "success"=>1);
+               	}
+               	else{ return array("filename"=>"", "success"=>0); }
+			}
+			return array("filename"=>"", "success"=>0);
 		}
 		function add_artist(){
 			$data = $this->input->post();
