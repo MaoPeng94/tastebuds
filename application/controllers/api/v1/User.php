@@ -62,6 +62,12 @@
 				case 'uploadPhoto':
 					$data = $this->uploadPhoto();
 					break;
+				case "updateCityBySearch":
+					$data = $this->updateCityBySearch();
+					break;
+				case "updateCityByDetection":
+					$data = $this->updateCityByDetection();
+					break;
 				default:
 					break;
 			}
@@ -105,18 +111,25 @@
 			if(isset($_FILES['image']) && $_FILES['image']['name'] != ""){
 				$fileName 						=  $userId.time();
 				$config['upload_path']          =  './assets/images/photos/';
-                $config['allowed_types']        =  'gif|jpg|png|jpeg';
+                $config['allowed_types']        =  '*';
                 $config['file_name']			= 	$fileName;
                	$this->load->library( 'upload', $config );
                	if( $this->upload->do_upload("image") ){
                		$ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION );
                		$fileName = $fileName.".".$ext;
                		$this->db->insert("tbl_photos", array("userId"=>$userId, "image"=>$fileName));
-               		return array("filename"=>$fileName, "success"=>1);
+               		if($this->db->insert_id() > 0){
+               			$this->db->where("userId", $userId);
+						$this->db->select("image");
+               			$query = $this->db->get("tbl_photos");
+               			return array("photos"=>$query->result_array(), "success"=>1);
+               		}else{
+               			return array("photos"=>"", "success"=>0); 
+               		}
                	}
-               	else{ return array("filename"=>"", "success"=>0); }
+               	else{ return array("photos"=>$this->upload->display_errors(), "success"=>0); }
 			}
-			return array("filename"=>"", "success"=>0);
+			return array("photos"=>"", "success"=>0);
 		}
 		function add_artist(){
 			$data = $this->input->post();
@@ -181,6 +194,33 @@
 	        }
 
 			return array("userId"=>$userId);
+		}
+
+		function updateCityBySearch(){
+			$userId = $this->input->post("userId");
+			$city_id = $this->input->post("city_id");
+			$this->db->join("states as s", "c.state_id=s.id");
+			$this->db->join("countries as co", "s.country_id=co.id");
+			$this->db->where("c.id", $city_id);
+			$this->db->select("c.name as city, co.name as country");
+			$query = $this->db->get("cities as c");
+			$data = $query->row_array();
+			$this->db->where("userId", $userId);
+			$this->db->update("tbl_users",$data);
+			return array("success"=>1, "data"=>$data);
+		}
+		function updateCityByDetection(){
+
+			$data = $this->input->post();
+			$userId = $data['userId'];
+			unset($data['userId']);
+			$this->db->where("userId", $userId);
+			$query = $this->db->update("tbl_users", $data);
+			if($this->db->affected_rows() > 0 ){
+				return array("success"=>1, "data"=>$data);
+			}
+			else return array("success"=>0, "data"=>array());
+
 		}
 	}
 

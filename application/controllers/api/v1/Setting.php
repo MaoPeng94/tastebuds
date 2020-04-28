@@ -13,7 +13,8 @@
 				case 'get_assets':
 					$data = $this->get_assets();
 					break;
-				
+				case 'search_city':
+					$data = $this->search_city();
 				default:
 					# code...
 					break;
@@ -83,5 +84,16 @@
 			if($query) return array("success"=>1, "data"=>$data);
 			else return array("success"=>0,"data"=>$data);
 		}
+		
+
+		function search_city(){
+			$keyword = $this->input->get("keyword");
+			$this->db->join("states as s", "c.state_id=s.id");
+			$this->db->join("countries as co", "s.country_id=co.id");
+			$this->db->like('c.name', $keyword, 'after');  
+			$this->db->select("c.id as id, c.name as city, co.name as country");
+			$query = $this->db->get("cities as c");
+			return $query->result_array();
+		}	
 	}
 ?>

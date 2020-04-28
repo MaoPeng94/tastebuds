@@ -28,7 +28,15 @@
 		function signin($userdata){
 			$this->db->where($userdata);
 			$query = $this->db->get($this->table);
-			if($query->num_rows() > 0){ return array("success"=>1, "user"=>$query->row_array()); }
+			if($query->num_rows() > 0){
+				$user = $query->row_array();
+				$this->db->where("userId", $user['userId']);
+				$this->db->select("image");
+				$query = $this->db->get("tbl_photos");
+				$photos = $query->num_rows()>0?$query->result_array():array();
+				$user['photos'] = $photos;
+			 	return array("success"=>1, "user"=>$user); 
+			}
 			else return array("success"=>0, "user"=>null);
 		}
 
@@ -37,7 +45,12 @@
 		function get_user($userId){
 			$this->db->where("userId", $userId);
 			$query = $this->db->get($this->table);
-			if($query->num_rows() > 0){ return array("success"=>1, "user"=>$query->row_array()); }
+			$user = $query->result_array();
+			$this->db->where("userId", $userId);
+			$query = $this->db->get("tbl_photos");
+			$photos = $query->num_rows()>0?$query->result_array():array();
+			$user['photos'] = $photos;
+			if($query->num_rows() > 0){ return array("success"=>1, "user"=>$user); }
 			else return array("success"=>0, "user"=>null);
 		}
 

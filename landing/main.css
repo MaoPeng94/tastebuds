@@ -1,0 +1,33 @@
+body{
+		background-image: url("background.png");
+		background-size: cover;
+		color:white;
+	}
+	.logo{
+		position: absolute;
+		top: 40px;
+		left: 56px;
+	}
+	.facebook{
+		position: absolute;
+		top:75px;
+		right:56px;
+	}
+	.red{
+		color:red;
+	}
+	.email{
+	    width: 500px;
+	    height: 50px;
+	    border-radius: 20px;
+	    padding-left: 20px;
+	    padding-right: 20px;
+	}
+	.btn-send{
+		padding: 12px 25px !important;
+    	border-radius: 20px;
+	}
+	.headline:after, .headline:before{
+		content:url("sol.png");
+		position: absolute;
+	}
