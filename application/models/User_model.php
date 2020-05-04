@@ -35,6 +35,22 @@
 				$query = $this->db->get("tbl_photos");
 				$photos = $query->num_rows()>0?$query->result_array():array();
 				$user['photos'] = $photos;
+				$this->db->where("userId", $user['userId']);
+				$this->db->select("uri,album,artist,image,url");
+				$query = $this->db->get("tbl_user_tracks");
+				if($query->num_rows()>0){
+					$user['track'] = $query->row_array();
+				}
+				else{
+					$user["track"] = array(
+						"uri" => "spotify:album:0INZ6ake8mQrfXktOHSLEu",
+						"album" => "the voicenotes",
+						"artist" => "Alaina Castillo",
+						"image" => "https://i.scdn.co/image/ab67616d0000b273b7d09d8197ee379e350feba6",
+						"url" => "https://open.spotify.com/album/0INZ6ake8mQrfXktOHSLEu"
+					);
+				}
+				$user['artists'] = $this->get_artists($user['userId']);
 			 	return array("success"=>1, "user"=>$user); 
 			}
 			else return array("success"=>0, "user"=>null);
@@ -61,6 +77,24 @@
 			if($query) return array("success"=>1, "msg"=>"Delete user success!");
 			return array("success"=>0, "msg"=>"Delete user failed!");
 
+		}
+
+		function get_artists($userId){
+			$this->db->where("userId", $userId);
+			$this->db->order_by("artist");
+			$query = $this->db->get("tbl_user_artists");
+			return $query->result_array();
+		}
+
+		function delete_artist($data){
+			$userId = $data['userId'];
+			$artistId = $data['artistId'];
+			$this->db->where(array("userId"=>$userId, "id"=>$artistId));
+			$query = $this->db->delete("tbl_user_artists");
+			if($query){
+				return true;
+			}
+			else return false;
 		}
 
 	}

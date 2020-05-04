@@ -15,6 +15,10 @@
 					break;
 				case 'search_city':
 					$data = $this->search_city();
+					break;
+				case "get_artists_list":
+					$data = $this->get_artists_list();
+					break;
 				default:
 					# code...
 					break;
@@ -91,8 +95,16 @@
 			$this->db->join("states as s", "c.state_id=s.id");
 			$this->db->join("countries as co", "s.country_id=co.id");
 			$this->db->like('c.name', $keyword, 'after');  
-			$this->db->select("c.id as id, c.name as city, co.name as country");
+			$this->db->select("c.id as id, c.name as city,s.name as state, co.name as country");
 			$query = $this->db->get("cities as c");
+			return $query->result_array();
+		}
+
+		function get_artists_list(){
+			$this->db->join("tbl_user_artists", "tbl_artists.id = tbl_user_artists.artistId", "left");
+			$this->db->where("artistId",null);
+			$this->db->select("tbl_artists.*");
+			$query = $this->db->get("tbl_artists");
 			return $query->result_array();
 		}	
 	}

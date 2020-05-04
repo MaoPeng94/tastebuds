@@ -16,9 +16,6 @@
 				case 'matches':
 					$data = $this->get_matches();
 					break;
-				case 'artists':
-					$data = $this->get_artists();
-					break;
 				case 'aboutme':
 					$data = $this->aboutme();
 					break;
@@ -50,8 +47,11 @@
 				case 'skip':
 					$data = $this->skip();
 					break;
-				case 'artist':
+				case 'addArtist':
 					$data = $this->add_artist();
+					break;
+				case 'deleteArtist':
+					$data = $this->delete_artist();
 					break;
 				case 'update_question':
 					$data = $this->update_question();
@@ -68,6 +68,8 @@
 				case "updateCityByDetection":
 					$data = $this->updateCityByDetection();
 					break;
+				case "setUserTrack":
+					$data = $this->setUserTrack();
 				default:
 					break;
 			}
@@ -133,6 +135,13 @@
 		}
 		function add_artist(){
 			$data = $this->input->post();
+			$this->db->insert("tbl_user_artists", $data);
+			if($this->db->insert_id() > 0){
+				$this->db->where("userId", $data["userId"]);
+				$query = $this->db->get("tbl_user_artists");
+				return array("success"=>1, "artists"=>$query->result_array());
+			}
+			else{ return array("success"=>0,"artists"=>array()); }
 			return $data;
 		}
 		function remove_artist(){
@@ -148,11 +157,6 @@
 			return $data;
 		}
 		function aboutme(){
-			$data = $this->input->get();
-			return $data;
-		}
-
-		function get_artists(){
 			$data = $this->input->get();
 			return $data;
 		}
@@ -210,7 +214,6 @@
 			return array("success"=>1, "data"=>$data);
 		}
 		function updateCityByDetection(){
-
 			$data = $this->input->post();
 			$userId = $data['userId'];
 			unset($data['userId']);
@@ -221,6 +224,31 @@
 			}
 			else return array("success"=>0, "data"=>array());
 
+		}
+
+		function setUserTrack(){
+			$data = $this->input->post();
+			$userId = $data['userId'];
+			$this->db->where("userId", $userId);
+			$count = $this->db->count_all_results("tbl_user_tracks");
+			if($count > 0 ){
+				$this->db->where("userId", $userId);
+				$this->db->update("tbl_user_tracks",$data);
+			}
+			else {
+				$this->db->insert("tbl_user_tracks", $data);
+			}
+			return array("success"=>1,"data"=>$data);
+		}
+
+		function delete_artist(){
+			$data = $this->input->post();
+			$res = $this->user->delete_artist($data);
+			if($res){
+				$artists = $this->user->get_artists($data['userId']);
+				return array("success"=>1, "artists"=>$artists);
+			}
+			return array("success"=>0, "artists"=>array());
 		}
 	}
 
