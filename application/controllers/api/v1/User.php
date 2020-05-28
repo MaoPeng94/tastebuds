@@ -24,8 +24,13 @@
 					break;
 				case 'subscribe':
 					$data = $this->subscribe();
+					break;
 				case "send_change_password":
 					$data = $this->send_change_password();
+					break;
+				case "chatlist":
+					$data = $this->get_matches();
+					break;
 				default:
 					break;
 			}
@@ -38,14 +43,14 @@
 				case 'signin':
 					$data = $this->signin();
 					break;
+				case 'fb_login':
+					$data = $this->fb_login();
+					break;
 				case 'signup':
 					$data = $this->signup();
 					break;
 				case 'like':
 					$data = $this->like();
-					break;
-				case 'skip':
-					$data = $this->skip();
 					break;
 				case 'addArtist':
 					$data = $this->add_artist();
@@ -89,6 +94,23 @@
 			$result = $this->user->signin($data);
 			return $result;
 		}
+
+		function fb_login(){
+			$username = explode(" ", $this->input->post('username'));
+			$email = $this->input->post('email');
+			$user = $this->user->check_fb_user($email);
+			if($user['success']){
+				return $user;
+			}
+
+			$data['firstname'] = $username[0];
+			$data['lastname'] = $username[1];
+			$data['email'] = $email;
+			$data['fb_user'] = 1;
+			$data['userId'] = "user".time();
+			$res = $this->user->fb_login($data);
+			return $res;
+		}
 		// get single user by userId
 		function get_user(){
 			$userId = $this->input->get("userId");
@@ -97,15 +119,14 @@
 		}
 		
 		function get_matches(){
-			$data = $this->input->get();
-			return $data;
+			// $data = $this->input->get();
+			$userId = $this->input->get("userId"); 
+			$matches = $this->user->get_matches($userId);
+			return $matches;
 		}
 		function like(){
 			$data = $this->input->post();
-			return $data;
-		}
-		function skip(){
-			$data = $this->input->post();
+			$this->user->set_like($data);
 			return $data;
 		}
 		function uploadPhoto(){
@@ -125,9 +146,7 @@
 						$this->db->select("image");
                			$query = $this->db->get("tbl_photos");
                			return array("photos"=>$query->result_array(), "success"=>1);
-               		}else{
-               			return array("photos"=>"", "success"=>0); 
-               		}
+               		}else{ return array("photos"=>"", "success"=>0);  }
                	}
                	else{ return array("photos"=>$this->upload->display_errors(), "success"=>0); }
 			}
