@@ -22,7 +22,6 @@ class Users extends CI_Controller{
 		if($user['success'] == 0) redirect("users");
 		$data['user'] = $user['user'];
 		$this->load->view("users/profile", $data);
-
 	}
 
 	function delete_user($userId){

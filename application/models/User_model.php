@@ -149,14 +149,15 @@
 				$query = $this->db->get("tbl_photos");
 				$photos = $query->num_rows()>0?$query->result_array():null;
 				$users[$key]['photos'] = $photos;
+
 				$this->db->where("userId", $user['userId']);
 				$this->db->select("uri,album,artist,image,url");
 				$query = $this->db->get("tbl_user_tracks");
 				if($query->num_rows()>0){
-					$user[$key]['track'] = $query->row_array();
+					$users[$key]['track'] = $query->row_array();
 				}
 				else{
-					$user[$key]["track"] = array(
+					$users[$key]["track"] = array(
 						"uri" => "spotify:album:0INZ6ake8mQrfXktOHSLEu",
 						"album" => "the voicenotes",
 						"artist" => "Alaina Castillo",
@@ -164,7 +165,7 @@
 						"url" => "https://open.spotify.com/album/0INZ6ake8mQrfXktOHSLEu"
 					);
 				}
-				$user[$key]['artists'] = $this->get_artists($user['userId']);
+				$users[$key]['artists'] = $this->get_artists($user['userId']);
 			}
 		 	return $users;
 		}
