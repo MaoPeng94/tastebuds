@@ -143,12 +143,28 @@
 			$this->db->where("userId !=", $userId);
 			$query = $this->db->get("tbl_users");
 			$users = $query->result_array();
-			foreach($users as $key=>$user){
+
+			foreach($users as $key => $user){
 				$this->db->where("userId", $user['userId']);
 				$this->db->select("image");
 				$query = $this->db->get("tbl_photos");
-				$photos = $query->num_rows()>0?$query->result_array():null;
+				$photos = $query->num_rows() > 0 ? $query->result_array() : null;
 				$users[$key]['photos'] = $photos;
+
+				$this->db->where("user_id", $user['id']);
+				$query = $this->db->get("tbl_answers");
+				$answers = $query->num_rows() > 0 ? $query->result_array() : null;
+
+				if($answers != null) {
+					$query = $this->db->get("tbl_questions");
+					$questions = $query->num_rows() > 0 ? $query->result_array() : null;					
+					foreach($answers as $index => $answer) {
+						foreach ($questions as $question) if($question['id'] == $answer['question_id']) {
+							$answers[$index]['question_text'] = $question['question'];
+						}
+					}
+				}
+				$users[$key]['answers'] = $answers;
 
 				$this->db->where("userId", $user['userId']);
 				$this->db->select("uri,album,artist,image,url");
