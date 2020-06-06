@@ -1,6 +1,6 @@
 <?php
 	
-	/* User management Model*/
+	/* Question management Model*/
 
 	class Question_model extends CI_Model{
 
